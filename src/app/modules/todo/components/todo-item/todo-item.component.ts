@@ -14,14 +14,15 @@ import { GeneralService } from '../../../../services/general.service';
 })
 export class TodoItemComponent implements OnInit {
 
-  @Input() tasks: any = []
+  @Input() tasks: Observable<Todo[]> = new Observable()
   @Input() title: string = ''
 
   constructor(
     private dialog: MatDialog,
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+   }
 
   editTodoModal(todo: Todo) {
 

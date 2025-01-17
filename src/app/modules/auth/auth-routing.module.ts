@@ -4,10 +4,6 @@ import { SigningComponent } from './pages/signing/signing.component';
 
 const routes: Routes = [
   {
-    path: 'signing',
-    component: SigningComponent
-  },
-  {
     path: '',
     component: SigningComponent
   }

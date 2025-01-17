@@ -1,12 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CreateTodo, UpdateTodo } from 'src/app/core/interfaces/todo-interface';
 import { environment } from 'src/environments/environment.prod';
+
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
+
+
+  public test: Observable<Object> = of({
+    _id: "1",
+    title: "Ejemplo",
+    description: "Esto es una simulacion",
+    status:{
+        _id:1,
+        name:"TESTNAME"
+    } 
+  })
 
   API = environment.API_URL
 
@@ -14,11 +26,22 @@ export class TodoService {
 
 
   getTodos(): Observable<Object> {
-    return this.http.get(`${this.API}/getAll`)
+    return new Observable(observer => { 
+      setTimeout(() => { 
+        observer.next(this.test); 
+        observer.complete(); 
+      }, 2000); });
+    // return this.http.get(`${this.API}/getAll`)
   }
 
   createTodo(todo: CreateTodo): Observable<Object> {
-    return this.http.post(`${this.API}/create`, todo)
+    console.log(todo);
+    return new Observable(observer => { 
+      setTimeout(() => { 
+        observer.next(this.test); 
+        observer.complete(); 
+      }, 2000); });
+    //return this.http.post(`${this.API}/create`, todo)
   }
 
   deleteTodo(id: string): Observable<Object> {
@@ -35,3 +58,4 @@ export class TodoService {
   }
 
 }
+
