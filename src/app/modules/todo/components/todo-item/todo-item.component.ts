@@ -5,6 +5,7 @@ import { Todo } from 'src/app/core/interfaces/todo-interface';
 // import { TodoService } from '../../../../services/todo.service';
 import { Observable } from 'rxjs';
 import { ConfirmComponent } from '../dialogs/confirm/confirm.component';
+import { IColumn } from 'src/app/core/interfaces/columm-interface';
 // import { GeneralService } from '../../../../services/general.service';
 
 @Component({
@@ -15,7 +16,7 @@ import { ConfirmComponent } from '../dialogs/confirm/confirm.component';
 export class TodoItemComponent implements OnInit {
 
   @Input() tasks: Observable<Todo[]> = new Observable<Todo[]>()
-  @Input() title: string | undefined;
+  @Input() title: Observable<IColumn[]> = new Observable<IColumn[]>;
 
   constructor(
     private dialog: MatDialog,
@@ -43,7 +44,7 @@ export class TodoItemComponent implements OnInit {
 
   }
 
-  deleteTodo() {//id: string
+  deleteTodo(id:string) {//id: string
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '400px',
       height: '200px',
@@ -59,8 +60,8 @@ export class TodoItemComponent implements OnInit {
     });
   }
 
-//   updateStatus(nuevoEstado: number, id: string) {
+  updateStatus(nuevoEstado: number, id: string) {
 
-
-//   }
+    throw new Error("Method no implemented!")
+  }
 }

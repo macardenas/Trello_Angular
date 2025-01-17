@@ -10,7 +10,7 @@ export class ModalTodoComponent implements OnInit {
 
   modeEdit: boolean = this.data.modeEdit || false;
   formTodo: FormGroup = new FormGroup({})
-  formChanged: boolean = false;
+  formChanged = false;
 
   constructor(
     public dialogRef: MatDialogRef<ModalTodoComponent>,

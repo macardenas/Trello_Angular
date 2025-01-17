@@ -1,21 +1,22 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { IBoardModal } from 'src/app/core/interfaces/board-interface';
+import { IColumnModal } from 'src/app/core/interfaces/columm-interface';
 
 @Component({
-  selector: 'app-modal-board',
-  templateUrl: './modal-board.component.html'
+  selector: 'app-modal-columm',
+  templateUrl: './modal-columm.component.html'
 })
-export class ModalBoardComponent implements OnInit {
+export class ModalColummComponent implements OnInit {
 
-  modeEdit: boolean = this.data.edit || false;
+modeEdit = this.data.edit || false;
   formTodo: FormGroup = new FormGroup({})
   formChanged = false;
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(
-        public dialogRef: MatDialogRef<ModalBoardComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: IBoardModal
+    public dialogRef: MatDialogRef<ModalColummComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: IColumnModal
   ) { }
 
   ngOnInit(): void {
@@ -25,9 +26,7 @@ export class ModalBoardComponent implements OnInit {
 
   formTodoGroup(): void {
     this.formTodo = new FormGroup({
-      title: new FormControl(this.data?.title, [Validators.required]),
-      description: new FormControl(this.data?.description,[Validators.required]),
-      img: new FormControl(this.data?.img),
+      title: new FormControl(this.data?.title, [Validators.required])
     });
   }
 
@@ -35,9 +34,7 @@ export class ModalBoardComponent implements OnInit {
     if (this.modeEdit) {
       this.formTodo.valueChanges.subscribe((value) => {
         this.formChanged = (
-          this.data.title !== value.title ||
-          this.data.description !== value.description ||
-          this.data.img !== value.img
+          this.data.title !== value.title
         );
       });
     }
