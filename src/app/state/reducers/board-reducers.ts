@@ -12,10 +12,10 @@ export const _boardreducer = createReducer(
     initialState,
     on(createBoardRequest, (state,{ board }) => {
         //Le asigno un id random para poder identificarlo
-        let idrandom = Math.floor(Math.random() * 10000) + 1;
-        let boardnewstate = { ...board, id:idrandom}
+        const idrandom = Math.floor(Math.random() * 10000) + 1;
+        const boardnewstate = { ...board, id:idrandom}
         return {
-            boards:[...state?.boards,boardnewstate], //Agrego el nuevo board creado
+            boards:[...state?.boards || [],boardnewstate], //Agrego el nuevo board creado
             loading: false
         }
 
@@ -23,7 +23,7 @@ export const _boardreducer = createReducer(
 ),
 
     on(getBoardsRequest, (state) => {
-        return { 
+        return {
             ...state, // Se agrega el TODO creado al arreglo de TODOS
             loading: false
         }

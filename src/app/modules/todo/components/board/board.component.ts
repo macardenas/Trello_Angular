@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IBoard } from 'src/app/core/interfaces/board-interface';
 
@@ -7,14 +7,14 @@ import { IBoard } from 'src/app/core/interfaces/board-interface';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent {
 
-  @Input() boards: Observable<IBoard[]> = new Observable()
+  @Input() boards: Observable<IBoard[]> = new Observable<IBoard[]>()
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() { }
 
-  ngOnInit(): void {
-  }
+
 
   InitBoard(data:IBoard){
     console.log(data);

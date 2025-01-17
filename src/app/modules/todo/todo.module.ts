@@ -14,7 +14,7 @@ import { ConfirmComponent } from './components/dialogs/confirm/confirm.component
 import { GenericInformationComponent } from './components/dialogs/generic-information/generic-information.component'
 import { GeneralService } from '../../services/general.service';
 import { BoardComponent } from './components/board/board.component';
-import { ModalBoardComponent } from './pages/modal-board/modal-board.component';
+import { ModalBoardComponent } from './components/modal-board/modal-board.component';
 import { BoardDetailComponent } from './pages/board-detail/board-detail.component'
 
 @NgModule({

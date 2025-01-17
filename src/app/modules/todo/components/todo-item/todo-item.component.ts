@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalTodoComponent } from '../modal-todo/modal-todo.component';
 import { Todo } from 'src/app/core/interfaces/todo-interface';
-import { TodoService } from '../../../../services/todo.service';
+// import { TodoService } from '../../../../services/todo.service';
 import { Observable } from 'rxjs';
 import { ConfirmComponent } from '../dialogs/confirm/confirm.component';
-import { GeneralService } from '../../../../services/general.service';
+// import { GeneralService } from '../../../../services/general.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -14,14 +14,15 @@ import { GeneralService } from '../../../../services/general.service';
 })
 export class TodoItemComponent implements OnInit {
 
-  @Input() tasks: Observable<Todo[]> = new Observable()
-  @Input() title: string = ''
+  @Input() tasks: Observable<Todo[]> = new Observable<Todo[]>()
+  @Input() title: string | undefined;
 
   constructor(
     private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
+    throw new Error("Error nos implemented!");
    }
 
   editTodoModal(todo: Todo) {
@@ -42,7 +43,7 @@ export class TodoItemComponent implements OnInit {
 
   }
 
-  deleteTodo(id: string) {
+  deleteTodo() {//id: string
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '400px',
       height: '200px',
@@ -58,8 +59,8 @@ export class TodoItemComponent implements OnInit {
     });
   }
 
-  updateStatus(nuevoEstado: number, id: string) {
+//   updateStatus(nuevoEstado: number, id: string) {
 
 
-  }
+//   }
 }
