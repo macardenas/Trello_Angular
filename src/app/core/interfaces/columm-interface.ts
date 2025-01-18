@@ -5,6 +5,8 @@ export interface IColumn {
 }
 
 export interface IColumnModal {
+    id:number;
+    id_board:number;
     title:string;
     edit:boolean
 }

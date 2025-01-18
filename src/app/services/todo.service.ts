@@ -35,7 +35,6 @@ export class TodoService {
   }
 
   createTodo(todo: CreateTodo): Observable<Object> {
-    console.log(todo);
     return new Observable(observer => { 
       setTimeout(() => { 
         observer.next(this.test); 

@@ -16,9 +16,33 @@ export interface CreateTodo{
     statusId: number
 }
 
+
 export interface UpdateTodo{
     title?: string,
     description?: string,
     statusId?: number
 }
 
+export interface ITodo{
+    id: number,
+    id_board:number,
+    id_column:number
+    title: string,
+    description?: string,
+}
+
+export interface ITodoModal {
+    id:number;
+    id_column:number;
+    id_board:number;
+    title:string;
+    description?: string;
+    edit?:boolean;
+    titleModal?:string
+}
+
+export interface ITodoState {
+    todos:ITodo[];
+    loading:boolean;
+    error?:string
+}

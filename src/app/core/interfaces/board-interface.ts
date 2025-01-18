@@ -6,6 +6,7 @@ export interface IBoard {
 }
 
 export interface IBoardModal {
+    id:number;
     title:string;
     description:string;
     img?:string;

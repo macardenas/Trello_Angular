@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { ITodoModal } from 'src/app/core/interfaces/todo-interface';
 
 @Component({
   selector: 'app-modal-todo',
@@ -8,13 +9,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 })
 export class ModalTodoComponent implements OnInit {
 
-  modeEdit: boolean = this.data.modeEdit || false;
+  modeEdit: boolean = this.data.edit || false;
   formTodo: FormGroup = new FormGroup({})
   formChanged = false;
 
   constructor(
     public dialogRef: MatDialogRef<ModalTodoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: ITodoModal
   ) { }
 
 
@@ -24,9 +25,8 @@ export class ModalTodoComponent implements OnInit {
   }
   formTodoGroup(): void {
     this.formTodo = new FormGroup({
-      title: new FormControl(this.data?.todo?.title, [Validators.required]),
-      description: new FormControl(this.data?.todo?.description),
-      statusId: new FormControl(this.data?.todo?.status._id || 1, [Validators.required]),
+      title: new FormControl(this.data?.title, [Validators.required]),
+      description: new FormControl(this.data?.description),
     });
   }
 
@@ -34,22 +34,21 @@ export class ModalTodoComponent implements OnInit {
     if (this.modeEdit) {
       this.formTodo.valueChanges.subscribe((value) => {
         this.formChanged = (
-          this.data.todo.title !== value.title ||
-          this.data.todo.description !== value.description ||
-          this.data.todo.status._id !== value.statusId
+          this.data.title !== value.title ||
+          this.data.description !== value.description
         );
       });
     }
   }
 
-  onChangeCurrentState(newState: number): void {
-    this.formTodo.patchValue({
-      statusId: newState
-    });
-  }
+  // onChangeCurrentState(newState: number): void {
+  //   this.formTodo.patchValue({
+  //     statusId: newState
+  //   });
+  // }
 
   saveTodo(): void {
     if (!this.formTodo.valid) return;
-    this.dialogRef.close(this.formTodo.value);
+    this.dialogRef.close({...this.formTodo.value,id_column:this.data.id_column,id_board: this.data.id_board, id: this.data.id});
   }
 }

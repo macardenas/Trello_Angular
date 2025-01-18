@@ -3,9 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-html, body { height: 100%; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: linear-gradient(to right, #06b6d4, #3b82f6);
+}
 
-.my-panel-class .mat-dialog-container{
+htmls{
+    height: 100%;
+}
+
+.my-panel-class .mat-dialog-container {
     padding: 0px;
 }

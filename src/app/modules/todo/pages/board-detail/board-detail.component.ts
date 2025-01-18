@@ -11,6 +11,10 @@ import { ModalColummComponent } from '../../components/modal-columm/modal-columm
 import { createColumnRequest, getColumnsRequest } from 'src/app/state/actions/column-action';
 import { IColumn } from 'src/app/core/interfaces/columm-interface';
 import { selectColumndById } from 'src/app/state/selectors/column-selector';
+import { ModalTodoComponent } from '../../components/modal-todo/modal-todo.component';
+import { getTodosRequest } from 'src/app/state/actions/todo-actions';
+import { selectTodosColumns } from 'src/app/state/selectors/todo-selectors';
+import { ITodo } from 'src/app/core/interfaces/todo-interface';
 
 @Component({
   selector: 'app-board-detail',
@@ -21,6 +25,7 @@ export class BoardDetailComponent implements OnInit  {
   idBoard = 0;
   Board: Observable<IBoard[]> = new Observable<IBoard[]>();
   Column: Observable<IColumn[]> = new Observable<IColumn[]>();
+  Taks: Observable<ITodo[]> = new Observable<ITodo[]>();
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private _router: ActivatedRoute,
@@ -36,7 +41,6 @@ export class BoardDetailComponent implements OnInit  {
     ngOnInit(): void {
         this.store.dispatch(getColumnsRequest())
         this.Column = this.store.select(selectColumndById(this.idBoard))
-        this.Column.subscribe(item => console.log(item));
     }
 
     createColumn(){
@@ -51,13 +55,7 @@ export class BoardDetailComponent implements OnInit  {
             if (!result) return
             //Luego de recibir la data disparo la accion para crear el tablero
             result.id_board = this.idBoard;
-            console.log(result);
             this.store.dispatch(createColumnRequest( { column: result }));
         })
     }
-
-
-
-
-
 }

@@ -6,6 +6,11 @@ export const createColumnRequest = createAction(
     props<{ column: IColumn }>()   // Carga útil que contiene los datos necesarios para crear un nuevo column
 )
 
+export const updateColumnRequest = createAction(
+    "[Column] Update Column Request",  // Identificador del tipo de acción
+    props<{ column: IColumn }>()   // Carga útil que contiene los datos necesarios para crear un nuevo column
+)
+
 export const getColumnsRequest = createAction(
     "[Column] Get Columns Request"  // Identificador del tipo de acción
 );

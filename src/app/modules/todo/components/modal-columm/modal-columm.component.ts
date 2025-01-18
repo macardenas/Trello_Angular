@@ -42,7 +42,7 @@ modeEdit = this.data.edit || false;
 
   saveTodo(): void {
     if (!this.formTodo.valid) return;
-    this.dialogRef.close(this.formTodo.value);
+    this.dialogRef.close({...this.formTodo.value,id:this.data.id,id_board:this.data.id_board});
   }
 
 }

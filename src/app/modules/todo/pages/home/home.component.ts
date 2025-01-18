@@ -4,7 +4,7 @@ import { Observable } from 'rxjs'
 import { AppState } from 'src/app/state/app.state'
 import { Store } from '@ngrx/store'
 
-import { createBoardRequest, getBoardsRequest } from 'src/app/state/actions/board-action'
+import { createBoardRequest, getBoardsRequest, updateBoardRequest } from 'src/app/state/actions/board-action'
 import { IBoard } from 'src/app/core/interfaces/board-interface'
 import { selectAllBoard } from 'src/app/state/selectors/board-selector'
 import { ModalBoardComponent } from '../../components/modal-board/modal-board.component'
@@ -15,9 +15,6 @@ import { ModalBoardComponent } from '../../components/modal-board/modal-board.co
 })
 export class HomeComponent implements OnInit {
 
-  // tasksCreated: Observable<Todo[]> = new Observable()
-  // tasksInProgress: Observable<Todo[]> = new Observable()
-  // tasksCompleted: Observable<Todo[]> = new Observable()
   BoardAll: Observable<IBoard[]> = new Observable<IBoard[]>();
 
   constructor(
@@ -28,10 +25,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(getBoardsRequest()) //Llama a la accion para obtener todos los board
     this.BoardAll = this.store.select(selectAllBoard)
-    // this.store.dispatch(getTodosRequest()) // llama a la acción para obtener los todos
-    // this.tasksCreated = this.store.select(selectTodosPending) // obtiene los todos pendientes
-    // this.tasksInProgress = this.store.select(selectTodosInProgress) // obtiene los todos en progreso
-    // this.tasksCompleted = this.store.select(selectTodosDone) // obtiene los todos completados
    }
 
   createBoard(){
