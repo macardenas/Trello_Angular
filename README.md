@@ -33,35 +33,36 @@ npm run test
 Estructura del proyecto:
 
 Gestión de tareas
-    ├───app
-    │   ├───core
-    │   │   ├───const
-    │   │   └───interfaces
-    │   ├───guards
-    │   ├───mock
-    │   ├───modules
-    │   │   ├───auth
-    │   │   │   └───pages
-    │   │   │       └───signing
-    │   │   └───todo
-    │   │       ├───components
-    │   │       │   ├───board
-    │   │       │   ├───buttons-status
-    │   │       │   ├───dialogs
-    │   │       │   │   ├───confirm
-    │   │       │   │   └───generic-information
-    │   │       │   ├───modal-board
-    │   │       │   ├───modal-columm
-    │   │       │   ├───modal-todo
-    │   │       │   └───todo-item
-    │   │       └───pages
-    │   │           ├───board-detail
-    │   │           └───home
-    │   ├───services
-    │   └───state
-    │       ├───actions
-    │       ├───reducers
-    │       └───selectors
-    ├───assets
-    │   └───img
-    └───environments
+
+    +---app
+    |   +---core
+    |   |   +---const
+    |   |   \---interfaces
+    |   +---guards
+    |   +---mock
+    |   +---modules
+    |   |   +---auth
+    |   |   |   \---pages
+    |   |   |       \---signing
+    |   |   \---todo
+    |   |       +---components
+    |   |       |   +---board
+    |   |       |   +---buttons-status
+    |   |       |   +---dialogs
+    |   |       |   |   +---confirm
+    |   |       |   |   \---generic-information
+    |   |       |   +---modal-board
+    |   |       |   +---modal-columm
+    |   |       |   +---modal-todo
+    |   |       |   \---todo-item
+    |   |       \---pages
+    |   |           +---board-detail
+    |   |           \---home
+    |   +---services
+    |   \---state
+    |       +---actions
+    |       +---reducers
+    |       \---selectors
+    +---assets
+    |   \---img
+    \---environments
