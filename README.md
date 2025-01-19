@@ -62,6 +62,7 @@ Gestión de tareas
     |   |       |   |   +---confirm
     |   |       |   |   \---generic-information
     |   |       |   +---modal-board
+
     |   |       |   +---modal-columm
     |   |       |   +---modal-todo
     |   |       |   \---todo-item
@@ -80,4 +81,12 @@ Gestión de tareas
 
 Demo de interfaz de la aplicación web
 
-! [Login] (src\assets\img\login.png.png )
+![login](https://github.com/user-attachments/assets/e46efbf0-5a98-42b7-86d7-c4f75ac4501e)
+
+![tablero](https://github.com/user-attachments/assets/cf2eda0d-4322-40dc-9fd3-513b17a6265e)
+
+![tareas](https://github.com/user-attachments/assets/b68f89a4-ef1c-41e0-bdee-e085b5c4633e)
+
+
+
+
