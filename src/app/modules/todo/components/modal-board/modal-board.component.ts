@@ -56,9 +56,6 @@ export class ModalBoardComponent implements OnInit {
     const file = (event.target as HTMLInputElement).files?.[0]; 
     if (file) { 
       const reader = new FileReader(); 
-      // reader.onload = () => { 
-      //   this.imagePreview = reader.result; 
-      // }; 
       reader.readAsDataURL(file); 
       // Crear una URL temporal y sanitizarla 
       this.fileUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)); 

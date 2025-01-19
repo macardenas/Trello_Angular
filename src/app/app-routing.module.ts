@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: 'todo',
     loadChildren: () => import('../app/modules/todo/todo.module').then(m => m.TodoModule),
-   // canActivate: [SigningGuard]
+    canActivate: [SigningGuard]
   },
   {
     path: '**',

@@ -12,7 +12,8 @@ export const _columnreducer = createReducer(
     initialState,
     on(createColumnRequest, (state,{ column }) => {
         const idrandom = Math.floor(Math.random() * 10001) + 10000;
-        const columnnewstate = { ...column, id:idrandom}
+        //La propiedad tasks solo la usa para cuando exporte un tablero
+        const columnnewstate = { ...column, id:idrandom, tasks:[]}
         return {
             columns:[...state?.columns || [],columnnewstate], // Se agrega el TODO creado al arreglo de TODOS
             loading: false

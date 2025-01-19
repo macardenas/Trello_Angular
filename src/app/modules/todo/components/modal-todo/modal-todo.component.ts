@@ -40,13 +40,6 @@ export class ModalTodoComponent implements OnInit {
       });
     }
   }
-
-  // onChangeCurrentState(newState: number): void {
-  //   this.formTodo.patchValue({
-  //     statusId: newState
-  //   });
-  // }
-
   saveTodo(): void {
     if (!this.formTodo.valid) return;
     this.dialogRef.close({...this.formTodo.value,id_column:this.data.id_column,id_board: this.data.id_board, id: this.data.id});

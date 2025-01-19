@@ -23,6 +23,7 @@ import { ITodo } from 'src/app/core/interfaces/todo-interface';
 export class BoardDetailComponent implements OnInit  {
 
   idBoard = 0;
+  DataBoard: IBoard[] = [];
   Board: Observable<IBoard[]> = new Observable<IBoard[]>();
   Column: Observable<IColumn[]> = new Observable<IColumn[]>();
   Taks: Observable<ITodo[]> = new Observable<ITodo[]>();
@@ -36,6 +37,7 @@ export class BoardDetailComponent implements OnInit  {
         this.idBoard = Number(this._router.snapshot.paramMap.get('id'));
         if(!this.idBoard) return;
         this.Board = this.store.select(selectBoardById(this.idBoard))
+        this.Board.subscribe(data=> this.DataBoard = [...data]);
     }
 
     ngOnInit(): void {
@@ -48,7 +50,7 @@ export class BoardDetailComponent implements OnInit  {
             width: '500px',
             height: '400px',
             panelClass: 'my-panel-class',
-            data: { titleModal: 'Crear nuevo tablero' }
+            data: { titleModal: 'Crear nueva Columna' }
         })
 
         dialogRef.afterClosed().subscribe((result: IColumn) => {

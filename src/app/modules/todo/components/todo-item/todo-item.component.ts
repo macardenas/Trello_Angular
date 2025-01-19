@@ -22,9 +22,9 @@ import { CdkDragDrop, moveItemInArray,  CdkDropList, CdkDrag, transferArrayItem 
 })
 export class TodoItemComponent implements OnInit {
 
-  // @Input() tasks: Observable<Todo[]> = new Observable<Todo[]>()
   @Input() Column: Observable<IColumn[]> = new Observable<IColumn[]>;
-  @Input() id_board: number = 0
+  @Input() id_board: number = 0;
+  searchTerm: string = '';
     
   TaksItems: Observable<ITodo[]> = new Observable<ITodo[]>();
   DataColumn: IColumn[] = [];
@@ -42,25 +42,7 @@ export class TodoItemComponent implements OnInit {
     this.TaksItems.subscribe( data=> this.DataTodo = [...data]);
   }
 
-  editTodoModal(todo: Todo) {
-
-    const dialogRef = this.dialog.open(ModalTodoComponent, {
-      width: '500px',
-      height: 'auto',
-      panelClass: 'my-panel-class',
-      data: {
-        titleModal: 'Editar tarea',
-        modeEdit: true,
-        todo
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (!result) return
-    })
-
-  }
-
-  deleteTodo(task:ITodo) {//id: string
+  deleteTodo(task:ITodo) {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '400px',
       height: '200px',
@@ -90,7 +72,6 @@ export class TodoItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (!result) return
       this.store.dispatch(deleteColumnRequest({column:task}))
-
     });
   }
 
@@ -108,7 +89,7 @@ export class TodoItemComponent implements OnInit {
       this.store.dispatch(createTodoRequest({ todo: result }));
     })
 }
-
+  //Actualizo los nuevos valores del TODO
   updateStatus(task:ITodo) {
     const dialogRef = this.dialog.open(ModalTodoComponent, {
       width: '500px',
@@ -138,15 +119,15 @@ export class TodoItemComponent implements OnInit {
         this.store.dispatch(updateColumnRequest({ column: result }));
     })
   }
-
+  //Para dar un ID unico al valor en el html para el ciclo for para una mejor identifacion
   trackByFn(index: number, item: any): any {
     return item.id; // o cualquier propiedad única del objeto
   }
-
-  drop(event: CdkDragDrop<string[]>,data: IColumn[] | ITodo[]) {
-     moveItemInArray( data, event.previousIndex, event.currentIndex);
+  //Con esto puedo mover las tareas
+  drop(event: CdkDragDrop<string[]>,type:string) {
+     moveItemInArray<ITodo | IColumn>( type =='column' ? this.DataColumn : this.DataTodo, event.previousIndex, event.currentIndex);
   }
-
+  //Con esto puedo mover las tareas entre columnas
   dropcolumns(event: CdkDragDrop<ITodo[]>) {
     
     console.log(
@@ -169,5 +150,13 @@ export class TodoItemComponent implements OnInit {
         event.currentIndex,
       );
     }
+  }
+  //Me permite filtrar por tareas
+  filterTasks(): ITodo[] { 
+    return this.DataTodo.filter(task => task.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+  }
+
+  onSearch(event: Event): void { 
+    this.searchTerm = (event.target as HTMLInputElement).value; 
   }
 }
