@@ -29,6 +29,16 @@ npm run start
 ```
 npm run test
 ```
+5. Para ingresar a la aplicación puede utilizar los siguientes usuarios:
+```
+Usuario: root
+Password: 123456
+```
+o
+```
+Usuario: user
+Password: 654321
+```
 
 Estructura del proyecto:
 
