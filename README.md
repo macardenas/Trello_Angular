@@ -1,6 +1,6 @@
 Bienvenido al proyecto de <em> Gestión de Tareas. </em>
 
-Este proyecto es realizado con las siguientes tecnologías:
+Este proyecto es realizado con las siguientes tecnologías ✅:
 
 * Angular 14.2.2
 * Ngx Store 14.3.1
@@ -66,3 +66,8 @@ Gestión de tareas
     +---assets
     |   \---img
     \---environments
+
+
+Demo de interfaz de la aplicación web
+
+! [Login] (src\assets\img\login.png.png )
