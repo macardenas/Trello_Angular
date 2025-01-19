@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalTodoComponent } from '../modal-todo/modal-todo.component';
-import { ITodo, Todo } from 'src/app/core/interfaces/todo-interface';
-// import { TodoService } from '../../../../services/todo.service';
+import { ITodo, ITodoModal } from 'src/app/core/interfaces/todo-interface';
 import { Observable } from 'rxjs';
 import { ConfirmComponent } from '../dialogs/confirm/confirm.component';
 import { IColumn } from 'src/app/core/interfaces/columm-interface';
@@ -13,7 +12,6 @@ import { selectTodosColumns } from 'src/app/state/selectors/todo-selectors';
 import { deleteColumnRequest, updateColumnRequest } from 'src/app/state/actions/column-action';
 import { ModalColummComponent } from '../modal-columm/modal-columm.component';
 import { CdkDragDrop, moveItemInArray,  CdkDropList, CdkDrag, transferArrayItem } from '@angular/cdk/drag-drop';
-// import { GeneralService } from '../../../../services/general.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -98,8 +96,10 @@ export class TodoItemComponent implements OnInit {
       data: { titleModal: 'Actualizar tarea',...task, edit:true }
     })
 
-    dialogRef.afterClosed().subscribe((result: ITodo) => {
+    dialogRef.afterClosed().subscribe((result: ITodoModal) => {
         if (!result) return
+        //Con esto valido si la nueva columna que me llega diferente a la actual la actualizo
+        if( result.id_column_new != undefined && result.id_column != result.id_column_new){ console.log("entreee"); result.id_column = Number(result.id_column_new)};
         //Luego de recibir la data disparo la accion para crear la tarea
       this.store.dispatch(updateTodoRequest({ todo: result }));
     })

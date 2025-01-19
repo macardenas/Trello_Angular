@@ -34,6 +34,7 @@ export interface ITodo{
 export interface ITodoModal {
     id:number;
     id_column:number;
+    id_column_new?:number;
     id_board:number;
     title:string;
     description?: string;
