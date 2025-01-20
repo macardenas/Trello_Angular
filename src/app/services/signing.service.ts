@@ -10,11 +10,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SigningService {
 
   private logginSubject = new BehaviorSubject<boolean>(false);
+  DataUser: IUserSigning[] = []
 
   constructor(private router: Router, private route: ActivatedRoute) { }
   //Con esto le informo al guard si fue exitoso el iniciode sesion
   isLoggin(): Observable<boolean> { 
     return this.logginSubject.asObservable(); 
+  }
+
+  Rol(){
+    return this.DataUser[0].rol
   }
   //Seteo el valor y aviso
   setLogginStatus(status: boolean): void { 
@@ -31,6 +36,7 @@ export class SigningService {
     }
     this.setLogginStatus(true);
     this.router.navigate([`../todo`], { relativeTo: this.route });
+    this.DataUser = userFind;
     return userFind;
   }
 }

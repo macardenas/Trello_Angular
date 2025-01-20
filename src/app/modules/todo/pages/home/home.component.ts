@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private store: Store<AppState> // Inyecta el servicio Store de NgRx para gestionar el estado de la aplicación
+    private store: Store<AppState>, // Inyecta el servicio Store de NgRx para gestionar el estado de la aplicación
   ) { }
 
   ngOnInit(): void {
