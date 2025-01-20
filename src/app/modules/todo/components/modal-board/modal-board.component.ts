@@ -14,6 +14,7 @@ export class ModalBoardComponent implements OnInit {
   formTodo: FormGroup = new FormGroup({})
   formChanged = false;
   fileUrl: SafeUrl | null = null;
+  imageName: string | undefined = undefined;
 
   constructor(
     public dialogRef: MatDialogRef<ModalBoardComponent>,
@@ -29,8 +30,7 @@ export class ModalBoardComponent implements OnInit {
   formTodoGroup(): void {
     this.formTodo = new FormGroup({
       title: new FormControl(this.data?.title, [Validators.required]),
-      description: new FormControl(this.data?.description, [Validators.required]),
-      img: new FormControl(this.data?.img),
+      description: new FormControl(this.data?.description, [Validators.required])
     });
   }
 
@@ -39,27 +39,15 @@ export class ModalBoardComponent implements OnInit {
       this.formTodo.valueChanges.subscribe((value) => {
         this.formChanged = (
           this.data.title !== value.title ||
-          this.data.description !== value.description ||
-          this.data.img !== value.img
+          this.data.description !== value.description
         );
       });
     }
   }
 
   saveTodo(): void {
-    console.log(this.formTodo.value);
     if (!this.formTodo.valid) return;
     this.dialogRef.close({ ...this.formTodo.value,img:this.fileUrl, id: this.data.id });
-  }
-
-  GetImg(event: Event) {
-    const file = (event.target as HTMLInputElement).files?.[0]; 
-    if (file) { 
-      const reader = new FileReader(); 
-      reader.readAsDataURL(file); 
-      // Crear una URL temporal y sanitizarla 
-      this.fileUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)); 
-    }
   }
 
 }

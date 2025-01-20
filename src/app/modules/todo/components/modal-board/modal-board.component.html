@@ -22,18 +22,6 @@
                     La descripción es obligatoria
                 </mat-error>
             </div>
-            <!-- input de img -->
-            <div class="mb-4">
-                <label for="taskDescription" class="block font-semibold text-lg">Imagen:</label>
-                <!-- <input type="file"> -->
-                 
-                <input formControlName="img"
-                    class="border p-2 rounded-md bg-gray-100 text-gray-800 w-full"
-                    type="file"
-                    accept="image/*"
-                    (change)="GetImg($event)"
-                >
-            </div>
             <div class="flex justify-center items-center space-x-4">
                 <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full shadow-md" mat-button
                     mat-dialog-close>

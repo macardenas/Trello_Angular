@@ -18,10 +18,8 @@ export class SigningGuard implements CanActivate {
       take(1),
       map(loggedIn => {
         if (loggedIn) {
-          console.log(loggedIn)
           return true;
         } else {
-          console.log(loggedIn)
           this.router.navigate(['/signing']);
           return false;
         }
