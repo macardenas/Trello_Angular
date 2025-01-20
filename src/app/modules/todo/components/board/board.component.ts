@@ -15,8 +15,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-board',
-  templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  templateUrl: './board.component.html'
 })
 export class BoardComponent implements OnInit {
 

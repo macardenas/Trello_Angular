@@ -57,7 +57,6 @@ Gestión de tareas
     |   |   \---todo
     |   |       +---components
     |   |       |   +---board
-    |   |       |   +---buttons-status
     |   |       |   +---dialogs
     |   |       |   |   +---confirm
     |   |       |   |   \---generic-information

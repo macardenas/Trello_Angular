@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store'
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { IBoard } from 'src/app/core/interfaces/board-interface';
 import { getBoardsRequest } from 'src/app/state/actions/board-action';
 import { AppState } from 'src/app/state/app.state';
@@ -11,24 +11,22 @@ import { ModalColummComponent } from '../../components/modal-columm/modal-columm
 import { createColumnRequest, getColumnsRequest } from 'src/app/state/actions/column-action';
 import { IColumn } from 'src/app/core/interfaces/columm-interface';
 import { selectColumndById } from 'src/app/state/selectors/column-selector';
-import { ModalTodoComponent } from '../../components/modal-todo/modal-todo.component';
-import { getTodosRequest } from 'src/app/state/actions/todo-actions';
-import { selectTodosColumns } from 'src/app/state/selectors/todo-selectors';
 import { ITodo } from 'src/app/core/interfaces/todo-interface';
 
 @Component({
   selector: 'app-board-detail',
   templateUrl: './board-detail.component.html',
 })
-export class BoardDetailComponent implements OnInit  {
+export class BoardDetailComponent implements OnInit, OnDestroy  {
 
   idBoard = 0;
   DataBoard: IBoard[] = [];
   Board: Observable<IBoard[]> = new Observable<IBoard[]>();
   Column: Observable<IColumn[]> = new Observable<IColumn[]>();
   Taks: Observable<ITodo[]> = new Observable<ITodo[]>();
+  //Para desuscribirlo
+  private boardSubscription!: Subscription;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private _router: ActivatedRoute,
               private store: Store<AppState>,
               private dialog: MatDialog
@@ -36,8 +34,13 @@ export class BoardDetailComponent implements OnInit  {
         this.store.dispatch(getBoardsRequest()) //Llama a la accion para obtener todos los board
         this.idBoard = Number(this._router.snapshot.paramMap.get('id'));
         if(!this.idBoard) return;
+        //Obtengo las columnas del tablero
         this.Board = this.store.select(selectBoardById(this.idBoard))
-        this.Board.subscribe(data=> this.DataBoard = [...data]);
+        this.boardSubscription = this.Board.subscribe(data=> this.DataBoard = [...data]);
+    }
+
+    ngOnDestroy(): void {
+        this.boardSubscription.unsubscribe();
     }
 
     ngOnInit(): void {

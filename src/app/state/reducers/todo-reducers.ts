@@ -1,6 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
 import { createTodoRequest, getTodosRequest, updateTodoRequest, deleteTodoRequest, todosError, } from "../actions/todo-actions";
-import { TodoState } from "src/app/core/interfaces/todo-state";
 import { ITodoState } from "src/app/core/interfaces/todo-interface";
 
 export const initialState: ITodoState = {

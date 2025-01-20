@@ -19,14 +19,14 @@ export const selectBoardById = (BoardID: number) =>
         (state) => state.boards.filter(item => item.id == BoardID)
     )
 
-// selector with param
+// selector with param Column
 export const selectColumnBoardById = (BoardID: number) =>
     createSelector(
         selectColumnState, // Selecciona el estado de los board
         (state) => state.columns.filter(item => item.id_board == BoardID)
     )
 
-// selector with param
+// selector with param Todo
 export const selectTodoBoardById = (BoardID: number) =>
     createSelector(
         selectTaskState, // Selecciona el estado de los board

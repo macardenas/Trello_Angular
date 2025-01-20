@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalTodoComponent } from '../modal-todo/modal-todo.component';
 import { ITodo, ITodoModal } from 'src/app/core/interfaces/todo-interface';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ConfirmComponent } from '../dialogs/confirm/confirm.component';
 import { IColumn } from 'src/app/core/interfaces/columm-interface';
 import { Store } from '@ngrx/store';
@@ -18,7 +18,7 @@ import { CdkDragDrop, moveItemInArray,  CdkDropList, CdkDrag, transferArrayItem 
   templateUrl: './todo-item.component.html',
   styleUrls: []
 })
-export class TodoItemComponent implements OnInit {
+export class TodoItemComponent implements OnInit, OnDestroy {
 
   @Input() Column: Observable<IColumn[]> = new Observable<IColumn[]>;
   @Input() id_board: number = 0;
@@ -28,6 +28,11 @@ export class TodoItemComponent implements OnInit {
   DataColumn: IColumn[] = [];
   DataTodo: ITodo[] = [];
 
+  private columnSubscription!: Subscription;
+  private tasksSubscription!: Subscription;
+
+
+
   constructor(
     private dialog: MatDialog,
     private store: Store<AppState>
@@ -36,8 +41,14 @@ export class TodoItemComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(getTodosRequest());
     this.TaksItems = this.store.select(selectTodosColumns(this.id_board));
-    this.Column.subscribe(data => this.DataColumn = [...data]); //Subscribo la data a una variable para poder usar el drag and drop y hago una copia de la data
-    this.TaksItems.subscribe( data=> this.DataTodo = [...data]);
+    //Lo declaro de esta manera para luego de destruir el componente desuscribo estos observable
+    this.columnSubscription= this.Column.subscribe(data => this.DataColumn = [...data]); //Subscribo la data a una variable para poder usar el drag and drop y hago una copia de la data
+    this.tasksSubscription= this.TaksItems.subscribe( data=> this.DataTodo = [...data]);
+  }
+
+  ngOnDestroy(): void {
+    this.columnSubscription.unsubscribe();
+    this.tasksSubscription.unsubscribe();
   }
 
   deleteTodo(task:ITodo) {
@@ -155,7 +166,7 @@ export class TodoItemComponent implements OnInit {
   filterTasks(): ITodo[] { 
     return this.DataTodo.filter(task => task.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
   }
-
+  //Le da el valor a la variable para filtrar
   onSearch(event: Event): void { 
     this.searchTerm = (event.target as HTMLInputElement).value; 
   }

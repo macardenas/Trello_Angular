@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { IBoardModal } from 'src/app/core/interfaces/board-interface';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-modal-board',
@@ -19,7 +19,6 @@ export class ModalBoardComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ModalBoardComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IBoardModal,
-    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {

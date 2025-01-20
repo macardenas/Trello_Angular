@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { CreateTodo, ITodo, Todo } from "src/app/core/interfaces/todo-interface";
+import { ITodo } from "src/app/core/interfaces/todo-interface";
 
 // Acción para iniciar la obtención de todos los elementos todo
 export const getTodosRequest = createAction(
